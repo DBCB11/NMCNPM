@@ -353,7 +353,7 @@
   .management-content-container .management-content .rooms .room:hover {
     background-color: #edeced;
   }
-  .management-content-container .management-content .rooms .room-image {
+  .management-content-container .management-content .rooms .room-id {
     width: 150x;
     height: 150px;
     border-radius: 4px;
@@ -432,7 +432,13 @@
   .management-content-container .management-content .staff .staff:hover {
     background-color: #edeced;
   }
-  .management-content-container .management-content .staff .room-image {
+  .management-content-container .management-content .staff .room-id {
+    width: 150x;
+    height: 150px;
+    border-radius: 4px;
+  }
+  
+   .management-content-container .management-content .staff .room-amount {
     width: 150x;
     height: 150px;
     border-radius: 4px;
@@ -910,7 +916,7 @@
   }
   .add-room-container .add-room-modal {
     width: 50%;
-    height: 83%;
+    height: 78%;
     background-color: white;
     color: black;
     padding: 4px 20px;

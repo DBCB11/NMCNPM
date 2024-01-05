@@ -47,7 +47,7 @@
               no-repeat;
           "
         ></div>
-        <span>Công Hùng</span>
+        <span>Đức Huy</span>
       </div>
 
       <!-- Hiển thị danh sách phòng -->

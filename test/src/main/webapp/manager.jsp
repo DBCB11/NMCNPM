@@ -1,3 +1,5 @@
+<%@page import="model.Room"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -158,45 +160,43 @@
                         <table style="width: 100%">
                             <tr >
                                 <th style="width: 5%">STT</th>
-                                <th style="width: 15%">Tên phòng</th>
-                                <th style="width: 20%">Hình ảnh</th>
-                                <th style="width: 40%">Thông tin</th>
+                                <th style="width: 5%">ID phòng</th>
+                                <th style="width: 10%">Tên phòng</th>
+                                <th style="width: 10%">Loại phòng</th>
+                                <th style="width: 10%">Số lượng</th>
+                                <th style="width: 20%">Thông tin</th>
+                                <th style="width: 20%">Giá phòng</th>
                                 <th style="width: 10%">Trạng thái</th>
-                                <th style="width: 10%">Hành động</th>
+                                <th style="width: 10%"></th>
                             </tr>
+                            <% ArrayList<Room> roomList = (ArrayList<Room>)request.getAttribute("roomList");
+                            int count = 1;
+                            if (roomList != null){
+                            	for(Room room : roomList){
+                            %>
                             <tr class="room" data-room-index="${index}">
-                                <td>1</td>
-                                <td>Phòng 101</td>
-                                <td>
-                                    <div class="room-image"style="background: url('./image/nền.jpeg') center /cover no-repeat;"></div>
-                                </td>
-                                <td style="text-align: left">
-                                    <ul>
-                                        <li>
-                                        <b>Loại phòng: </b>
-                                        Phòng hạng sang
-                                        </li>
-                                        <li>
-                                        <b>Mô tả: </b>
-                                        Phòng được bài trí theo phong cách hiện đại, có thể được
-                                        đặt cho hai người cũng như cho một người.
-                                        </li>
-                                        <li>
-                                        <b>Giá: </b>
-                                        1.0000.000 VND
-                                        </li>
-                                    </ul>
-                                </td>
-                                <td>Đã đặt</td>
-                                <td>
+                            <td><%= count %></td>
+                            <td><%= room.getRoomID() %></td>
+                            <td><%= room.getRoomName()%></td>
+                            <td><%= room.getRoomType()%></td>
+                            <td><%= room.getRoomAmount()%></td>
+                            <td><%= room.getRoomDescription()%></td>
+                            <td><%= room.getRoomPrice()%></td>
+                            <td><%= room.getRoomStatus()%></td>
+                            <td>
                                     <button class="btn-edit-room" onclick="handleEditRoom(${index})">
                                         <i class="fa-solid fa-pen"></i>
                                     </button>
                                     <button class="btn-delete-room" onclick="handleDeleteRoom(${index})">
                                         <i class="fa-solid fa-trash"></i>
                                     </button>
-                                </td>
-                            </tr>
+                             </td>
+                             <% 	count++;
+                            	}
+                             }else {
+                            	 out.println("Danh sách rỗng");
+                             }
+                            %>
                         </table>
                     </div>
                 </div>
@@ -267,29 +267,55 @@
                     <i class="fa-solid fa-xmark icon-close"></i>
                     <div class="title">Tạo phòng mới</div>
                     <div class="content">
-                    <div class="room-name">
+                    
+                    <div style="margin-top:5px;" class="room-id">
+                        <label for="room-image">ID</label>
+                        <input type="text" id="room-id" name="room-id" />
+                    </div>
+                    
+                    <div style="margin-top:5px;"  class="room-name">
                         <label for="room-name">Tên phòng</label>
                         <input type="text" id="room-name" name="room-name" />
                     </div>
                   
-                    <div class="room-image">
-                        <label for="room-image">Id</label>
-                        <input type="" id="room-image" name="room-image" />
-                    </div>
-                    <div class="room-type">
-                        <label for="room-type">Loại phòng</label>
-                        <input type="text" id="room-type" name="room-type" />
-                    </div>
-                    <div class="room-description">
+                    <div style="margin-top:5px;"  class="room-amount">
+                    	<div style="display: inline;" class="room-type">
+	                        <label for="room-type">Loại phòng</label>
+	                        <select style="width: 150px; height: 30px; border-radius: 4px;" id="roomType" name="roomType">
+	                        	<option value = "Executive" > Phòng Executive </option>
+	                        	<option value = "Deluxe" > Phòng Deluxe </option>
+	                        	<option value = "Standard" > Phòng Standard </option>
+	                        	<option value = "Superior" > Phòng Superior </option>
+	                        </select>
+           				</div>
+           				<div  style="display: inline;  margin-left:40px" class = "room-amount">
+           					<label for="room-amount">Số lượng người</label>
+                        	<select  style="width: 35px; height: 30px; border-radius: 4px;" id = "roomAmount" name = "roomAmount">
+	                        	<option value = "1" > 1 </option>
+	                        	<option value = "2" > 2 </option>
+	                        	<option value = "3" > 3 </option>
+	                        	<option value = "4" > 4 </option>
+	                        </select>
+           				</div>
+           				<div  style="display: inline;  margin-left:40px" class = "room-amount">
+           					<label for="room-amount">Trạng thái phòng</label>
+                        	<select  style="width: 100px; height: 30px; border-radius: 4px;" id = "roomStatus" name = "roomStatus">
+	                        	<option value = "avaliable" > Còn trống </option>
+	                        	<option value = "unavaliable" > Đã đặt </option>
+	                        </select>
+           				</div>
+                    </div> 
+                    <div style="margin-top:5px;"  class="room-description">
                         <label for="room-description">Mô tả</label>
                         <textarea name="room-description" id="room-description">
                         </textarea>
                     </div>
-                    <div class="room-price">
+                
+                    <div style="margin-top:5px;"  class="room-price">
                         <label for="room-price">Giá</label>
                         <input type="text" name="room-price" id="room-price" />
                     </div>
-                    <div class="btn-submit btn btn-primary" onclick="AddRoom()">Tạo mới</div>
+                    <button  type ="submit"> Tạo mới </button>
                     </div>
                 </form>
                 </div>

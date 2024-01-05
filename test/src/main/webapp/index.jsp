@@ -21,9 +21,9 @@
         </div>
 			<%
 				String baoLoi = request.getAttribute("baoLoi")+"";
-				if(baoLoi.equals("null")){
-					baoLoi = "";
-				}
+				if(!baoLoi.equals("null")){%>
+					<script type="text/javascript"> alert("<%= baoLoi %>")</script>
+				<% }
 			%>
         <div class="btn-container">
             <button type="button" class="btn btn-secondary btn-block btn-large" onclick="window.location.href='customer_home_page.html'">Customer</button>
@@ -35,7 +35,6 @@
         <i class="ti-close login-close-icon"></i>
         <form action = "Login" method="POST">
             <h1>Login</h1>
-            <div class="text-center"><%=baoLoi %></div>
             <div class = "input-box">
                 <input id = "accountID" name = "accountID" type = "text" placeholder="Username" required class="login-input">
                 <i class='bx bx-user'></i>
@@ -48,7 +47,6 @@
                 <label><input type = "checkbox"> Remember me</label>
                 <a href="#">Forgot password</a>
             </div>
-
             <button  type ="submit" class = "btn">Login</button>
         </form>
     </div>
